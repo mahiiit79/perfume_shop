@@ -1,0 +1,23 @@
+<aside class="col-md-4 col-lg-3">
+                                <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if forloop.first %}active{% endif %}" id="tab-dashboard-link"
+                                            href="{% url 'dashboard' %}" role="tab" aria-controls="tab-dashboard"
+                                            aria-selected="true">داشبورد</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if forloop.first %}active{% endif %}" id="tab-orders-link" href="{% url 'user_shopping_page'%}"
+                                            role="tab" aria-controls="tab-orders" aria-selected="false"> لیست خرید های قبلی</a>
+                                    </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link {% if forloop.first %}active{% endif %}" id="tab-dashboard-link"
+                                            href="{% url 'edit_profile_page' %}" role="tab" aria-controls="tab-dashboard"
+                                            aria-selected="true">ویرایش اطلاعات</a>
+                                    </li>
+                                     <li class="nav-item">
+                                        <a class="nav-link {% if forloop.first %}active{% endif %}" id="tab-dashboard-link"
+                                            href="{% url 'edit_password_dashboard_page' %}" role="tab" aria-controls="tab-dashboard"
+                                            aria-selected="true">تغییرکلمه عبور</a>
+                                    </li>
+                                </ul>
+                            </aside><!-- End .col-lg-3 -->

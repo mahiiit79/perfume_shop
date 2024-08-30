@@ -1,0 +1,17 @@
+
+
+
+{% for category in categories %}
+
+                                            <div class="filter-items filter-items-count">
+                                                <div class="filter-item">
+                                                    <div class="custom-control">
+                                                        <label class="" for="cat-1"><a href="{% url 'perfume_categories_list' cat=category.url_title %}">
+                                                            {{ category.title }}
+                                                        </a></label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                </div><!-- End .filter-item -->
+
+                                            </div><!-- End .filter-items -->
+{% endfor %}
+

@@ -1,0 +1,43 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+	صفحه بازیابی رمزعبور
+{% endblock %}
+
+
+
+{% block background %}
+    <div class="background" style="background-color: mediumpurple">
+{% endblock %}
+{% block content %}
+	<main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home_page' %}">خانه</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">ورود / ثبت نام</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+                style="background-image: url('/static/assets/images/slider/vecteezy_purple-gradient-background-vector-art_17067277.jpg')">
+                <div class="container">
+                 <form action="" method="post">
+      <div class="user-details">
+
+        {% csrf_token %}
+        <div class="input-box">
+<span class="details sign-up">شماره همراه</span>
+<input type="text" name="mobile" readonly value="{{ mobile }}" style="color: black">
+    <span class="details sign-up">کد ورود</span>
+    <input type="number" placeholder="کد ارسال شده به تلفن همراه" name="otp">
+</div>
+      </div>
+      <div class="button">
+        <input type="submit" value="بازیابی رمزعبور">
+      </div>
+    </form>
+                </div><!-- End .container --></div><!-- End .login-page section-bg -->
+        </main><!-- End .main -->
+    </div>{% endblock %}

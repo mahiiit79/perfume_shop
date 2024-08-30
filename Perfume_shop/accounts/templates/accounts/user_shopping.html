@@ -1,0 +1,99 @@
+{% extends 'shared/layout.html' %}
+{% load poll_extras %}
+{% block title %}
+	صفحه تغییر پروفایل
+{% endblock %}
+
+
+{% block background %}
+    <div class="background" style="background-color: mediumpurple">
+{% endblock %}
+
+
+{% block content %}
+
+
+    <section class="invoice1">
+        <div class="container ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="invoice-popup overflow-auto">
+                        <div>
+                            <div class="row invoice-header">
+                                <div class="col-md-6 ">
+                                    <div class="header-invoice-right">
+                                        <div class="brand-logo">
+                                            <a href="../index-1.html">
+                                                <img src="{{ site_setting.site_logo.url }}" alt='logo' style="width: 150px;height: 150px">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="header-invoice-left">
+                                        <ul>
+                                            <li>
+                                                <h2>فروشگاه {{ site_setting.site_name }}</h2>
+                                            </li>
+                                            <li>تماس با ما : {{ site_setting.phone }}</li>
+                                            <li>{{ site_setting.email }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-breadcrumb">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="breadcrumb-right">
+                                            <ul>
+                                                <li>نام مشتری : <span>{{ customer.first_name }} {{ customer.last_name }}</span></li>
+                                                <li>آدرس : <span>{{ customer.address }}</span></li>
+                                                <li>شماره تماس : <span>{{ customer.mobile }}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="table-responsive-md">
+
+
+
+
+                                <table class="invoice-table ">
+                                    <thead>
+                                        <tr>
+                                            <th>شناسه</th>
+                                            <th>نام عطر</th>
+                                            <th>تاریخ تایید فاکتور</th>
+                                            <th>قیمت نهایی</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td>{{ order.id }}</td>
+                                                <td>
+                                                    <ul>
+                                                        {% for order_detail in order.orderdetail_set.all %}
+                                                            <li>{{ order_detail.perfume.title }} - x{{ order_detail.count }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </td>
+                                                <td>{{ order.payment_date | show_jalali_date }}</td>
+                                                <td>{{ order.calculate_total_price | three_digits_currency }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>{% endblock %}

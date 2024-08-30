@@ -1,0 +1,136 @@
+{% extends 'shared/layout.html' %}
+{% load poll_extras %}
+{% load thumbnail %}
+
+{% block title %}
+	صفحه جست و جو
+{% endblock %}
+
+
+
+{% block background %}
+	   <div class="background" style="background-color: mediumpurple">
+{% endblock %}
+
+
+
+{% block content %}
+	<main class="main">
+            <div class="page-header text-center" style="background-image: url('/static/assets/images/slider/vecteezy_purple-gradient-background-vector-art_17067277.jpg')">
+                <div class="container">
+                    <h1 class="page-title">نتایج جستجو</h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home_page' %}">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'perfume_list' %}">فروشگاه</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">نتایج جستجو</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="toolbox">
+                                <div class="toolbox-left">
+                                    <div class="toolbox-info">
+                                        نمایش <span>{{ perfume_search.paginator.count }}</span> محصول
+                                    </div><!-- End .toolbox-info -->
+                                </div><!-- End .toolbox-left -->
+
+                            </div><!-- End .toolbox -->
+
+                        	 {% if perfume_search %}
+                        	 	  {% for perfume in perfume_search %}
+                           	 <div class="products mb-3">
+                                <div class="product product-list">
+                                    <div class="row">
+                                        <div class="col-6 col-lg-3">
+                                            <figure class="product-media">
+                                                <a href="{% url 'perfume_detail' pk=perfume.id %}">
+                                                   {% thumbnail perfume.image "185x185" quality=90 crop='center' as im %}
+                                <img src="{{ im.url }}" class="mx-auto mb-5" alt="image">
+                                {% endthumbnail %}
+                                                </a>
+                                            </figure><!-- End .product-media -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-6 col-lg-3 order-lg-last">
+                                            <div class="product-list-action">
+                                                <div class="product-price">
+                                                    {{ perfume.mil_price | three_digits_currency }}(هرمیلی لیتر)
+                                                </div><!-- End .product-price -->
+                                                <a href="{% url 'perfume_detail' pk=perfume.id %}" class="btn-product btn-cart"><span>افزودن به سبد
+                                                        خرید</span></a>
+                                            </div><!-- End .product-list-action -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-lg-6">
+                                            <div class="product-body product-action-inner">
+                                                <div class="product-cat">
+                                                   {% for category in perfume.category.all %}
+                                                        {{ category.title }}
+                                                    {% endfor %}
+                                                </div><!-- End .product-cat -->
+                                                <h3 class="product-title"><a href="{% url 'perfume_detail' pk=perfume.id %}">{{ perfume.title }}</a>
+                                                </h3><!-- End .product-title -->
+                                                <div class="product-content">
+                                                    <p class="short">{{ perfume.short_description }}</p>
+                                                </div><!-- End .product-content -->
+                                            </div><!-- End .product-body -->
+                                        </div><!-- End .col-lg-6 -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .product -->
+                            </div><!-- End .products -->
+                           {% endfor %}
+                                 {% else %}
+                                 <div class="products mb-3">
+                                 <h3>محصول مورد نظر یافت نشد!</h3>
+                                 <img src="/static/assets/images/products/search.PNG">
+                                 </div>
+                        	 {% endif %} 
+                            
+                        
+                        
+                        
+                        
+                        {% if perfume_search %}
+                            <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {% if perfume_search.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link page-link-prev" href="?search={{ request.GET.search }}&page={{ perfume_search.previous_page_number }}" aria-label="Previous" tabindex="-1">
+                                    <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>قبلی
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in perfume_search.paginator.page_range %}
+                            {% if num == perfume_search.number %}
+                                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ num }}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?search={{ request.GET.search }}&page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if perfume_search.has_next %}
+                            <li class="page-item">
+                                <a class="page-link page-link-next" href="?search={{ request.GET.search }}&page={{ perfume_search.next_page_number }}" aria-label="Next">
+                                    بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                            </ul>
+                            </nav>
+                        {% endif %} 
+                        </div><!-- End .col-lg-9 -->
+                        
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+    </div>{% endblock %}

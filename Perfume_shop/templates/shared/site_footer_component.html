@@ -1,0 +1,100 @@
+<footer class="footer mt-3">
+			<div class="container service">
+				<div class="row">
+					<div class="col-sm-6 col-lg-3">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon">
+								<i class="icon-rocket"></i>
+							</span>
+
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">ارسال رایگان</h3><!-- End .icon-box-title -->
+								<p>برای سفارشات بالای یک میلیون تومان</p>
+							</div><!-- End .icon-box-content -->
+						</div><!-- End .icon-box -->
+					</div><!-- End .col-sm-6 col-lg-4 -->
+
+					<div class="col-sm-6 col-lg-3">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon">
+								<i class="icon-rotate-left"></i>
+							</span>
+
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">بازگشت کالا</h3><!-- End .icon-box-title -->
+								<p>به مدت 7 روز</p>
+							</div><!-- End .icon-box-content -->
+						</div><!-- End .icon-box -->
+					</div><!-- End .col-sm-6 col-lg-4 -->
+
+					<div class="col-sm-6 col-lg-3">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon">
+								<i class="icon-info-circle"></i>
+							</span>
+
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">ضمانت اصل بودن کالا</h3>
+								<!-- End .icon-box-title -->
+							</div><!-- End .icon-box-content -->
+						</div><!-- End .icon-box -->
+					</div><!-- End .col-sm-6 col-lg-4 -->
+
+					<div class="col-sm-6 col-lg-3">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon">
+								<i class="icon-life-ring"></i>
+							</span>
+
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">پشتیبانی ما</h3><!-- End .icon-box-title -->
+								<p>ارائه خدمات 24 ساعته / 7 روز هفته</p>
+							</div><!-- End .icon-box-content -->
+						</div><!-- End .icon-box -->
+					</div><!-- End .col-sm-6 col-lg-4 -->
+				</div>
+			</div>
+
+			<div class="footer-middle">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-12">
+							<div class="widget widget-about">
+								<img src="{{ site_setting.site_logo.url }}" class="footer-logo" alt="Footer Logo"
+									width="110" height="25">
+								<p>{{ site_setting.about_us_text }}</p>
+
+								<div class="social-icons">
+									<a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
+											class="icon-instagram"></i></a>
+								</div><!-- End .soial-icons -->
+							</div><!-- End .widget about-widget -->
+						</div><!-- End .col-sm-12 col-lg-3 -->
+
+					{% for footer_link_box in footer_link_boxes %}
+							<div class="col-lg-3 col-sm-4 col-md-4">
+							<div class="widget">
+								<h4 class="widget-title">{{ footer_link_box.title }}</h4><!-- End .widget-title -->
+                        {% for link in footer_link_box.footerlink_set.all %}
+                            <ul class="widget-list">
+                                                            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                                        </ul><!-- End .widget-list -->
+                        {% endfor %}
+
+								
+							</div><!-- End .widget -->
+						</div><!-- End .col-lg-3 col-sm-4 col-md-4 -->
+					{% endfor %}
+					
+                        
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="container">
+					<p class="footer-copyright">{{ site_setting.copy_right }}</p>
+					<!-- End .footer-copyright -->
+
+				</div><!-- End .widget-about-info -->
+			</div><!-- End .container -->
+        </footer>

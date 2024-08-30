@@ -1,0 +1,153 @@
+{% load poll_extras %}
+
+<header class="header">
+				<div class="header-top">
+					<div class="header-right">
+						<ul class="top-menu">
+							<li>
+								<a href="#">لینک ها</a>
+								<ul>
+                                     {% if request.user.is_authenticated %}
+                                    {% if request.user.is_superuser %}
+                                         <li><a href="/admin"><i class="icon-user"></i>پنل ادمین</a>
+                                    {% endif %}
+
+
+                                <li><a href="{% url 'dashboard' %}" ><i class="icon-user"></i>پنل کاربری</a>
+                                    <li><a href="{% url 'logout' %}"><i class=""></i>خروج</a>
+                                     {% else %}
+                                     <li><a href="{% url 'register_page' %}"><i class="icon-user"></i>ثبت نام</a></li>
+                                     <li><a href="{% url 'login_page' %}"><i class="icon-user"></i>ورود</a>
+                                {% endif %}
+
+								</ul>
+							</li>
+						</ul><!-- End .top-menu -->
+					</div><!-- End .header-right -->
+				</div><!-- End .header-top -->
+
+				<div class="header-middle sticky-header">
+					<div class="header-left">
+						<button class="mobile-menu-toggler">
+							<span class="sr-only">فهرست</span>
+							<i class="icon-bars"></i>
+						</button>
+
+						<a href="i{% url 'home_page' %}" class="logo">
+							<img src="{{ site_setting.site_logo.url }}" alt="Molla Logo" width="100" height="20">
+						</a>
+					</div><!-- End .header-left -->
+
+					<div class="header-center">
+						<nav class="main-nav">
+							<ul class="menu sf-arrows">
+								<li class="megamenu-container {% if request.resolver_match.url_name == 'home_page' %} active{% endif %}">
+									<a href="{% url 'home_page' %}" class="">خانه</a>
+								</li>
+                            
+                                <li><a href="{% url 'perfume_list' %}" class="sf-with-ul">عطر </a>
+                                <ul>
+                                    {% for category in categories %}
+                                       <li><a href="{% url 'perfume_categories_list' cat=category.url_title %}">{{ category.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                </li>
+                                
+                                <li><a href="{% url 'about_page' %}">درباره ما</a></li>
+                                
+								<li>
+									<a href="{% url 'Contact_us_page' %}" class="">تماس با ما</a>
+								</li>
+                            
+								<li>
+									<a href="{% url 'dashboard' %}" class="">پنل کاربری</a>
+                                    
+								</li>
+							</ul><!-- End .menu -->
+						</nav><!-- End .main-nav -->
+					</div>
+
+					<div class="header-right">
+						<div class="header-search">
+							
+							<form action="{% url 'search_page' %}" method="get">
+								<div class="header-search-wrapper">
+									<label for="q" class="sr-only">جستجو</label>
+									<input type="search" class="form-control" name="search" id="q"
+										placeholder="جستجوی محصول ..." required>
+								</div><!-- End .header-search-wrapper -->
+                                <a href="#" class="search-toggle" role="button" title="جستجو"><i
+									class="icon-search" type="submit"></i></a>
+							</form>
+						</div><!-- End .header-search -->
+                        
+                    
+                    
+                    
+                        
+                    
+                    
+						{% if request.user.is_authenticated %}
+                            
+							<div class="dropdown cart-dropdown">
+							<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false" data-display="static">
+								<i class="icon-shopping-cart"></i>
+								<span class="cart-count" id="header-basket-count">{{ order.orderdetail_set.count }}</span>
+							</a>
+
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-cart-products" id="header-order-details">
+                               {% if order_details %}
+                                	{% for order_detail in order_details %}
+										<div class="product">
+										<div class="product-cart-details" >
+											<h4 class="product-title text-center">
+												<a href="{% url 'perfume_detail' pk=order_detail.perfume.id %}">{{ order_detail.perfume.title }}</a>
+											</h4>
+
+											<span class="cart-product-info">
+												<span class="cart-product-qty">{{ order_detail.count }} x </span>
+												{{ order_detail.volume.price |three_digits_currency }}
+											</span>
+										</div><!-- End .product-cart-details -->
+
+										<figure class="product-image-container">
+											<a href="{% url 'perfume_detail' pk=order_detail.perfume.id %}" class="product-image">
+												<img src="{{ order_detail.perfume.image.url }}" alt="محصول">
+											</a>
+										</figure>
+										{% comment %}<a  class="btn-remove" title="حذف محصول"  onclick="removeHeaderOrderDetail({{ order_detail.id }})"><i class="icon-close"></i></a>{% endcomment %}
+                                      {% comment %}  <input type="hidden" id="detail-id" value="{{ order_detail.id }}">
+                                    <a class="btn-remove" title="حذف محصول" onclick="removeHeaderOrderDetail()"><i class="icon-close"></i></a>{% endcomment %}
+                                      
+									</div><!-- End .product -->
+									{% endfor %}
+                            
+                                    {% else %}
+                                    
+                                    <h5>سبد خرید شما خالی است!</h5>
+                                {% endif %} 
+								
+								</div><!-- End .cart-product -->
+                            
+                                {% if order_details %}
+								<div class="dropdown-cart-total">
+									<span>مجموع</span>
+									<span class="cart-total-price" id="total-price-header">{{ sum }}تومان</span>
+								</div><!-- End .dropdown-cart-total -->
+                                    {% endif %}
+
+								<div class="dropdown-cart-action">
+									<a href="{% url 'user_basket' %}" class="btn btn-primary">مشاهده سبد خرید</a>
+								</div><!-- End .dropdown-cart-total -->
+							</div><!-- End .dropdown-menu -->
+						</div><!-- End .cart-dropdown -->
+						{% endif %} 
+                        
+     
+
+                    
+					</div><!-- End .header-right -->
+				</div><!-- End .header-middle -->
+			</header><!-- End .header -->

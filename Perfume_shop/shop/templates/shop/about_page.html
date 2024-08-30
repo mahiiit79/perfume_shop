@@ -1,0 +1,88 @@
+{% extends 'shared/layout.html' %}
+{% load thumbnail %}
+
+{% block title %}
+	صفحه درباره ما
+{% endblock %}
+
+
+
+{% block background %}
+	   <div class="background" style="background-color: mediumpurple">
+{% endblock %}
+
+
+{% block content %}
+	<main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home_page' %}">خانه</a></li>
+                        <li class="breadcrumb-item active"><a href="{% url 'about_page' %}">درباره ما</a></li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+
+
+
+
+            <div class="page-content pb-3">
+                <div class="container">
+
+
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="about-text text-center mt-3">
+                                <h2 class="title text-center mb-2">رایحه خوب با مامیر!</h2><!-- End .title text-center mb-2 -->
+                                <p class="text-center">{{ site_setting.about_us_text }}</p>
+                                 {% thumbnail site_setting.image "268x250" quality=90 crop='center' as im %}
+                                <img src="{{ im.url }}" class="mx-auto mb-5" alt="image">
+                                {% endthumbnail %}
+                            </div><!-- End .about-text -->
+                        </div><!-- End .col-lg-10 offset-1 -->
+                    </div><!-- End .row -->
+
+
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="icon-box icon-box-sm text-center">
+                                <span class="icon-box-icon">
+                                    <i class="icon-puzzle-piece"></i>
+                                </span>
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">آدرس ما</h3><!-- End .icon-box-title -->
+                                    <p class="text-center">{{ site_setting.address }}</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-lg-4 col-sm-6 -->
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="icon-box icon-box-sm text-center">
+                                <span class="icon-box-icon">
+                                    <i class="icon-life-ring"></i>
+                                </span>
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">شماره تماس</h3><!-- End .icon-box-title -->
+                                    <p class="text-center">{{ site_setting.phone }}</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-lg-4 col-sm-6 -->
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="icon-box icon-box-sm text-center">
+                                <span class="icon-box-icon">
+                                    <i class="icon-heart-o"></i>
+                                </span>
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">ایمیل</h3><!-- End .icon-box-title -->
+                                    <p class="text-center">{{ site_setting.email }}</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-lg-4 col-sm-6 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+                <div class="mb-2"></div><!-- End .mb-2 -->
+                        </div><!-- End .col-lg-10 offset-lg-1 -->
+    </main></div><!-- End .row -->
+      <!-- End .main -->
+{% endblock %}

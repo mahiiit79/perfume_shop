@@ -1,0 +1,218 @@
+{% extends 'shared/layout.html' %}
+{% load thumbnail %}
+{% load poll_extras %}
+
+
+{% block title %}
+	صفحه اصلی
+{% endblock %}
+
+{% block background %}
+	<div class="background" style="background-image: url(/static/assets/images/demos/demo-24/slider/IMG_4804.JPG);">
+{% endblock %}
+
+{% block slider %}
+	<div class="slider">
+				<div class="intro">
+					<div class="title">
+					</div>
+					<div class="content">
+                        <div class="patterns">
+                    <svg width="80%" height="80%">
+                    <defs>
+                      <pattern id="polka-dots" x="0" y="0" width="100" height="100">
+                      </pattern>
+                    </defs>
+                    <rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
+                 <text x="50%" y="60%"  text-anchor="middle">
+                    رایحه خوش با مامیر پرفیوم !
+                 </text>
+                 </svg>
+                </div></div>
+				</div>
+			</div>
+{% endblock %}
+
+
+{% block content %}
+
+	<main class="main">
+			<section class="best-sellers">
+				<div class="container">
+					<div class="heading">
+						<h3 class="heading-title">جدید ترین محصولات</h3>
+					</div>
+					<div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow text-center"
+						data-toggle="owl" data-owl-options='{
+                        "nav": true,
+                        "dots": false,
+                        "margin": 30,
+                        "loop": false,
+                        "rtl": true,
+                            "responsive": {
+                            "0": {
+                                "items":2
+                            },
+                            "768": {
+                            	"items":3
+                            },
+                            "992": {
+                                "items":3
+                            },
+                            "1200": {
+                            	"items":4
+                            }
+                        }
+                    }'>
+						{% for latest_perfume in latest_perfumes %}
+							<div class="product product-10 text-center">
+							<figure class="product-media">
+								<a href="{% url 'perfume_detail' pk=latest_perfume.id %}">
+                                    {% thumbnail latest_perfume.image "268x250" quality=90 crop='center' as im %}
+                        <img src="{{ im.url }}" class="product-image" alt="image">
+                                {% endthumbnail %}
+								</a>
+
+							</figure><!-- End .product-media -->
+
+							<div class="product-body">
+
+								<div class="product-action">
+									<a href="{% url 'perfume_detail' pk=latest_perfume.id %}" class="btn-cart"><span>افزودن به سبد خرید</span></a>
+
+								</div><!-- End .product-action -->
+								<div class="product-intro">
+									<h3 class="product-title text-center text-center">
+										<a href="product.html">{{ latest_perfume.title }}</a>
+									</h3><!-- End .product-title text-center -->
+									<div class="product-price">
+										  {{ latest_perfume.mil_price | three_digits_currency}}
+									</div><!-- End .product-price -->
+								</div>
+                                <div class="product-detail">
+                                    ( قیمت ها به ازای هر میل می باشند.)
+								</div>
+								<div class="product-detail">
+                                    {{ latest_perfume.short_description }}
+								</div>
+							</div><!-- End .product-body -->
+						</div><!-- End .product -->
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+
+
+            <section class="blog mb-6">
+				<div class="container">
+					<div class="heading">
+                        <h3 class="heading-title">محصولات پربازدید</h3>
+					</div>
+					<div class="owl-carousel owl-simple mb-4" data-toggle="owl" data-owl-options='{
+	                        "nav": true,
+	                        "dots": false,
+	                        "items": 3,
+	                        "margin": 20,
+	                        "loop": false,
+	                        "rtl": true,
+                            "responsive": {
+	                            "0": {
+	                                "items":1,
+	                                "dots":true
+	                            },
+	                            "520": {
+	                                "items":2,
+	                                "dots":true
+	                            },
+	                            "768": {
+	                                "items":3
+	                            }
+	                        }
+	                    }'>
+						{% for perfume in most_visit_perfumes %}
+							<article class="entry">
+							<figure class="entry-media">
+								<a href="{% url 'perfume_detail' pk=perfume.id %}">
+									  {% thumbnail perfume.image "268x250" quality=90 crop='center' as im %}
+                        <img src="{{ im.url }}" class="product-image" alt="image">
+                                {% endthumbnail %}
+								</a>
+							</figure><!-- End .entry-media -->
+
+							<div class="entry-body text-center">
+
+
+								<h3 class="entry-title text-center">
+									<a href="{% url 'perfume_detail' pk=perfume.id %}">{{ perfume.title }}</a>
+								</h3><!-- End .entry-title -->
+
+								<div class="entry-content">
+									<a href="{% url 'perfume_detail' pk=perfume.id %}" class="read-more">افزودن به سبد خرید</a>
+								</div><!-- End .entry-content -->
+							</div><!-- End .entry-body -->
+						</article><!-- End .entry -->
+						{% endfor %}
+
+					</div><!-- End .owl-carousel -->
+				</div>
+			</section>
+
+			<section class="featured-products">
+				<div class="container">
+					<div class="heading">
+						<h3 class="heading-title">پرفروش ترین محصولات</h3>
+					</div>
+
+
+					<div class="row">
+
+							<div class="col-lg-7 col-md-7 products">
+							{% for perfume in most_bought_perfumes %}
+								<div class="col-6">
+								<div class="product product-10 text-center">
+									<figure class="product-media">
+										<a href="{% url 'perfume_detail' pk=perfume.id %}">
+											    {% thumbnail perfume.image "268x250" quality=90 crop='center' as im %}
+                        <img src="{{ im.url }}" class="product-image" alt="image">
+                                {% endthumbnail %}
+								</a>
+
+									</figure><!-- End .product-media -->
+
+									<div class="product-body">
+
+										<div class="product-action">
+											<a href="{% url 'perfume_detail' pk=perfume.id %}" class="btn-cart"><span>افزودن به سبد خرید</span></a>
+										</div><!-- End .product-action -->
+										<div class="product-intro">
+											<h3 class="product-title text-center">
+												<a href="{% url 'perfume_detail' pk=perfume.id %}">{{ perfume.title }} </a>
+											</h3><!-- End .product-title text-center -->
+											<div class="product-price">
+												هر میلی لیتر{{ perfume.mil_price | three_digits_currency}}
+											</div><!-- End .product-price -->
+										</div>
+									</div><!-- End .product-body -->
+								</div><!-- End .product -->
+							</div>
+							{% endfor %}
+
+
+
+
+
+
+
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+    </main></div>
+
+{% endblock %}

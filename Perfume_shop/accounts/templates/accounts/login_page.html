@@ -1,0 +1,78 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+	صفحه ورود
+{% endblock %}
+
+
+{% block background %}
+    <div class="background" style="background-color: mediumpurple">
+{% endblock %}
+
+
+{% block content %}
+  <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="#">صفحات</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">ورود / ثبت نام</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+                style="background-image: url('/static/assets/images/slider/vecteezy_purple-gradient-background-vector-art_17067277.jpg')">
+                <div class="container">
+                    <div class="form-box">
+
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+                                        aria-controls="signin-2" aria-selected="true">ورود به حساب کاربری</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                                    <form action="#" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="singin-email-2">شماره همراه</label>
+                                                    {{ login_form.mobile }}
+                                            {{ login_form.mobile.errors }}
+                                        </div><!-- End .form-group -->
+                                        <div class="form-group">
+                                            <label for="singin-password-2">رمز عبور *</label>
+                                           {{ login_form.password }}
+                                           {{ login_form.password.errors }}
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>ورود</span>
+                                                <i class="icon-long-arrow-left"></i>
+                                            </button>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="signin-remember-2">
+                                               <a href="{% url 'register_page' %}" class="forgot-link">ثبت نام</a>
+                                            </div><!-- End .custom-checkbox -->
+
+                                            <a href="{% url 'forget_pass' %}" class="forgot-link">فراموشی رمزعبور</a>
+                                        </div><!-- End .form-footer -->
+                                    </form>
+                                   
+                                </div><!-- .End .tab-pane -->
+
+
+                            </div><!-- End .tab-content -->
+                        </div><!-- End .form-tab -->
+                    </div><!-- End .form-box -->
+                </div><!-- End .container -->
+            </div><!-- End .login-page section-bg -->
+        </main><!-- End .main -->
+    </div>{% endblock %}

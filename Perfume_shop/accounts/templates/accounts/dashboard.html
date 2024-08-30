@@ -1,0 +1,39 @@
+{% extends 'shared/layout.html' %}
+{% load render_partial %}
+{% block title %}
+	داشبورد
+{% endblock %}
+
+{% block background %}
+    <div class="background" style="background-color: mediumpurple">
+{% endblock %}
+
+{% block content %}
+ <main class="main">
+            <div class="page-header text-center" style="background-image: url('/static/assets/images/slider/vecteezy_purple-gradient-background-vector-art_17067277.jpg')">
+                <div class="container">
+                    <h1 class="page-title">داشبورد<span>فروشگاه</span></h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="dashboard">
+                    <div class="container">
+                        <div class="row">
+                        {% render_partial 'accounts.views.user_panel_menu_component' %}
+
+                            <div class="col-md-8 col-lg-9">
+                                 {% if user.is_authenticated %}
+                                <p>کاربرگرامی {{ user }}  به مامیر پرفیوم خوش آمدید . </p>
+                              {% endif %}
+                            </div>
+
+                        </div><!-- End .row -->
+                    </div><!-- End .container -->
+                </div><!-- End .dashboard -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+    </div>{% endblock %}
